@@ -43,7 +43,7 @@
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <span class="fw-semibold d-block">{{auth()->user()->name}}</span>
+                                    <span class="fw-semibold d-block">name</span>
                                 </div>
                             </div>
                         </a>

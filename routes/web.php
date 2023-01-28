@@ -4,21 +4,25 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 
-
-Route::get('/', function () {
-    return view('welcome');
-})->name('/');
-
-Route::get('/admin', function () {
-    return view('admin.master');
-})->middleware(['auth', 'verified'])->name('admin');
-
-
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+Route::get('testlash', function () {
+    \App\Services\HemisLoginService::testLogin();
 });
 
-require __DIR__.'/auth.php';
+
+
+
+Route::get('login',[\App\Http\Controllers\LoginController::class,'login'])->name('login');
+Route::post('login-user',[\App\Http\Controllers\LoginController::class,'loginUser'])->name('login-user');
+
+Route::middleware('hemis')->group(function(){
+    Route::get('/', function () {
+        return view('welcome');
+    })->name('/');
+
+    Route::get('/admin', function () {
+        return view('admin.master');
+    })->name('admin');
+
+});
+
+
