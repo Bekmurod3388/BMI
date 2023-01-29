@@ -69,10 +69,22 @@
 
     <ul class="menu-inner py-1">
         <!-- Dashboard -->
-        <li class="menu-item active">
+        <li class="menu-item active ">
             <a href="#" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Analytics">Dashboard</div>
+            </a>
+        </li>
+        <li class="menu-item active ">
+            <a href="#" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-book"></i>
+                <div data-i18n="Analytics">Mavzu tanlash</div>
+            </a>
+        </li>
+        <li class="menu-item active">
+            <a href="#" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-plus"></i>
+                <div data-i18n="Analytics">Mavzu qo'shish</div>
             </a>
         </li>
 

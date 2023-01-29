@@ -5,7 +5,7 @@ namespace App\Services;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Request;
 
-class HemisLoginService
+class HemisService
 {
     public static function login($login,$password)
     {
@@ -29,6 +29,26 @@ class HemisLoginService
             session()->put('loggedin',true);
         }
         return $a->success;
+
+    }
+    public static function getMe(){
+
+        $token=session()->get('hemistoken');
+        $client = new Client(['verify' => false]);
+        $headers = [
+            'Authorization' => 'Bearer '.$token,
+
+        ];
+        $request = new Request('GET', 'https://student.ubtuit.uz/rest/v1/account/me', $headers);
+        $res = $client->sendAsync($request)->wait();
+        $a=json_decode($res->getBody());
+        if ($a->success){
+            session()->put('hemisaboutme',$a->data);
+            session()->put('hemisshortname',$a->data->short_name);
+            session()->put('hemisimage',$a->data->image);
+        }
+        return $a->success;
+
 
     }
 

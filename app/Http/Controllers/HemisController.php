@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Providers\RouteServiceProvider;
-use App\Services\HemisLoginService;
+use App\Services\HemisService;
 use Illuminate\Http\Request;
 
-class LoginController extends Controller
+class HemisController extends Controller
 {
     public function login(){
 
@@ -23,11 +23,24 @@ class LoginController extends Controller
             'password'=>'required'
         ]);
         try {
-            if(HemisLoginService::login($request->login,$request->password)){
-                return view('admin.master');
+            if(HemisService::login($request->login,$request->password)){
+                return redirect()->route('profile');
             }
         }catch (\Exception $exception){
             return redirect()->route('login')->withErrors('Login yoki parol xato !');
+        }
+
+    }
+    public function logout(){
+        session()->flush();
+        return redirect()->route('login');
+    }
+    public function profile(){
+        try {
+            HemisService::getMe();
+            return view('admin.profile');
+        }catch (\Exception $exception){
+            return redirect()->route('login')->withErrors('Talaba ma\'lumotlarini olishda xatolik, iltimos qayta urinib ko\'ring !');
         }
 
     }
