@@ -76,17 +76,12 @@
             </a>
         </li>
         <li class="menu-item active ">
-            <a href="#" class="menu-link">
+            <a href="{{route('themes')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-book"></i>
-                <div data-i18n="Analytics">Mavzu tanlash</div>
+                <div data-i18n="Analytics">Mavzular</div>
             </a>
         </li>
-        <li class="menu-item active">
-            <a href="#" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-plus"></i>
-                <div data-i18n="Analytics">Mavzu qo'shish</div>
-            </a>
-        </li>
+
 
 
     </ul>
