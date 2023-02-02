@@ -10,21 +10,50 @@ class ThemeController extends Controller
 {
     public function index(){
         $themes=Theme::all();
-        dd(session('hemistoken'));
         return view('admin.themes.index',compact('themes'));
     }
     public function store(Request $request){
         $request->validate([
             'name'=>'required',
-            'description'=>'required'
+            'description'=>'required',
+            'specialty'=>'required',
+            'level'=>'required',
         ]);
         //TODO teacher profili bn kirilganda teacher id ni berib yuborish kerak leki  hozircha techaer id 0 ga teng, login , parol yo'qligi uchun
         try {
-            ThemeService::createTheme($request->name,$request->description,0);
+            ThemeService::createTheme($request->name,$request->description,$request->specialty,$request->level,0);
             return redirect()->route('themes')->with('msg','Mavzu muvaffaqiyatli yaratildi');
 
-        }catch (\Throwable $e) {
+        }catch (\Exception $e) {
             return redirect()->back()->with('error', 'Xatolik yuz berdi');
+        }
+    }
+
+    public function update(Request $request){
+        $request->validate([
+            'name'=>'required',
+            'description'=>'required',
+            'specialty'=>'required',
+            'level'=>'required',
+        ]);
+        try {
+            ThemeService::updateTheme($request->id,$request->name,$request->description,$request->specialty,$request->level);
+            return redirect()->route('themes')->with('msg','Mavzu muvaffaqiyatli yangilandi');
+
+        }catch (\Exception $e) {
+            return redirect()->back()->withErrors($e->getMessage());
+        }
+    }
+    public function delete(Request $request){
+        $request->validate([
+            'id'=>'required',
+        ]);
+        try {
+            ThemeService::deleteTheme($request->id);
+            return redirect()->route('themes')->with('msg','Mavzu muvaffaqiyatli o`chirildi');
+
+        }catch (\Exception $e) {
+            return redirect()->back()->withErrors( $e->getMessage());
         }
     }
 

@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="d-flex align-items-center justify-content-center mt-5">
-<form class="form col-3" method="post" action="{{route('login-user')}}">@csrf
+<form class="form col-3" method="post" action="{{route('login-student-user')}}">@csrf
     <div class="mb-3">
         <h2>Hemis tizimidagi login parolni kiriting</h2>
         @if($errors->any())

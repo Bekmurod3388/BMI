@@ -17,7 +17,7 @@ class HemisLogin
     public function handle(Request $request, Closure $next)
     {
         if ( !session()->has('loggedin')){
-            return redirect()->route('login');
+            return redirect()->route('login-student');
         }
         return $next($request);
     }

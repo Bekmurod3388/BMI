@@ -11,7 +11,7 @@ class HemisController extends Controller
     public function login(){
 
         if (session()->has('loggedin')) {
-            return redirect()->route('admin');
+            return redirect()->route('themes');
         }else{
             return view('hemis.login');
         }
@@ -27,20 +27,20 @@ class HemisController extends Controller
                 return redirect()->route('profile');
             }
         }catch (\Exception $exception){
-            return redirect()->route('login')->withErrors('Login yoki parol xato !');
+            return redirect()->route('login-student')->withErrors('Login yoki parol xato !');
         }
 
     }
     public function logout(){
         session()->flush();
-        return redirect()->route('login');
+        return redirect()->route('login-student');
     }
     public function profile(){
         try {
             HemisService::getMe();
             return view('admin.profile');
         }catch (\Exception $exception){
-            return redirect()->route('login')->withErrors('Talaba ma\'lumotlarini olishda xatolik, iltimos qayta urinib ko\'ring !');
+            return redirect()->route('login-student')->withErrors('Talaba ma\'lumotlarini olishda xatolik, iltimos qayta urinib ko\'ring !');
         }
 
     }
