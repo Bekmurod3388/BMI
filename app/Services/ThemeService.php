@@ -4,7 +4,7 @@ namespace App\Services;
 use App\Models\Theme;
 class ThemeService
 {
-    public static function createTheme($name,$description,$specialty,$level,$teacher_id=0){
+    public static function create($name, $description, $specialty, $level, $teacher_id=0){
         $theme=new Theme();
         $theme->name=$name;
         $theme->description=$description;
@@ -18,7 +18,7 @@ class ThemeService
     /**
      * @throws \Exception
      */
-    public static function updateTheme($id, $name, $description, $specialty, $level){
+    public static function update($id, $name, $description, $specialty, $level){
         $theme=Theme::find($id);
         if ($theme->student_id!=0){
             throw new \Exception('Mavzu talaba tomonidan  tanlanganligi uchun o`zgaritirsh mumkin emas');
@@ -31,7 +31,7 @@ class ThemeService
         return $theme;
     }
 
-    public static function deleteTheme($id){
+    public static function delete($id){
         $theme=Theme::find($id);
         if ($theme->student_id!=0){
             throw new \Exception('Mavzu talaba tomonidan  tanlanganligi uchun o`chirish mumkin emas');

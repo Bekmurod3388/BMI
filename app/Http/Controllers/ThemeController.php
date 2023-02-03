@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Process;
 use App\Models\Theme;
 use App\Services\ThemeService;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class ThemeController extends Controller
         ]);
         //TODO teacher profili bn kirilganda teacher id ni berib yuborish kerak leki  hozircha techaer id 0 ga teng, login , parol yo'qligi uchun
         try {
-            ThemeService::createTheme($request->name,$request->description,$request->specialty,$request->level,0);
+            ThemeService::create($request->name,$request->description,$request->specialty,$request->level,0);
             return redirect()->route('themes')->with('msg','Mavzu muvaffaqiyatli yaratildi');
 
         }catch (\Exception $e) {
@@ -37,7 +38,7 @@ class ThemeController extends Controller
             'level'=>'required',
         ]);
         try {
-            ThemeService::updateTheme($request->id,$request->name,$request->description,$request->specialty,$request->level);
+            ThemeService::update($request->id,$request->name,$request->description,$request->specialty,$request->level);
             return redirect()->route('themes')->with('msg','Mavzu muvaffaqiyatli yangilandi');
 
         }catch (\Exception $e) {
@@ -49,7 +50,7 @@ class ThemeController extends Controller
             'id'=>'required',
         ]);
         try {
-            ThemeService::deleteTheme($request->id);
+            ThemeService::delete($request->id);
             return redirect()->route('themes')->with('msg','Mavzu muvaffaqiyatli o`chirildi');
 
         }catch (\Exception $e) {
@@ -63,6 +64,9 @@ class ThemeController extends Controller
         $theme->student_name=session('hemisaboutme')->second_name.' '.session('hemisaboutme')->first_name.' '.session('hemisaboutme')->third_name;
         $theme->student_id=session('hemisaboutme')->student_id_number;
         $theme->save();
+        $process=new Process();
+        $process->theme_id=$id;
+        $process->save();
         return redirect()->route('themes')->with('msg','Mavzu tanlandi');
 
 

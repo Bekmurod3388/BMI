@@ -22,12 +22,10 @@ Route::middleware('hemis')->group(function(){
     Route::post('update-theme',[\App\Http\Controllers\ThemeController::class,'update'])->name('update-theme');
     Route::post('delete-theme',[\App\Http\Controllers\ThemeController::class,'delete'])->name('delete-theme');
     Route::get('get-theme/{id}',[\App\Http\Controllers\ThemeController::class,'getTheme'])->name('get-theme');
-    Route::get('/', function () {
-        return redirect()->route('themes');
-    });
-    Route::get('/admin', function () {
-        return view('admin.master');
-    })->name('admin');
+    Route::get('/', function () { return redirect()->route('themes'); });
+    Route::get('processes',[\App\Http\Controllers\ProcessController::class,'index'])->name('processes');
+    Route::get('process',[\App\Http\Controllers\ProcessController::class,'student_index'])->name('process');
+
 
 });
 
