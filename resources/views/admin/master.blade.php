@@ -119,6 +119,13 @@
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{asset('tinymce/tinymce.min.js')}}"></script>
+<script>
+    tinymce.init({
+        selector: 'textarea'
+    });
+
+</script>
 
 <script>
     let errors = @json($errors->all());
