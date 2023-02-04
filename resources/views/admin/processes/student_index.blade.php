@@ -12,11 +12,13 @@
                 <hr>
                 <h4 class="text text-dark"><span class="fw-bolder">Izoh: </span> {{$process->theme->description}}</h4>
                 <hr>
-                <h4 class="text text-dark"><span class="fw-bolder">O'qituvchi: </span> {{$process->theme->teacher_id}}</h4>
+                <h4 class="text text-dark"><span class="fw-bolder">Ilmiuy: </span> {{$process->theme->teacher_id}}</h4>
                 <hr>
                 <form action="">
-                    <label for="student_textarea" class="form-label">Mundarija:</label>
-                    <textarea name="process" id="student_textarea" cols="30" rows="10"  class="form-control"></textarea>
+                    <label for="student_textarea " class="form-label fw-bolder fs-2">Mundarija:</label>
+                    <textarea name="process" id="student_textarea" cols="30" rows="10"  class="form-control">
+                        {{$process->content}}
+                    </textarea>
 
                 </form>
             @else

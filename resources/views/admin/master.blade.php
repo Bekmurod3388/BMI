@@ -43,7 +43,15 @@
 
     <link rel="stylesheet" href="../assets/vendor/libs/apex-charts/apex-charts.css" />
 
-    <!-- Page CSS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.3.1/tinymce.min.js" integrity="sha512-eV68QXP3t5Jbsf18jfqT8xclEJSGvSK5uClUuqayUbF5IRK8e2/VSXIFHzEoBnNcvLBkHngnnd3CY7AFpUhF7w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea',
+            promotion: false,
+            branding: false,
+        });
+
+    </script>
 
     <!-- Helpers -->
     <script src="../assets/vendor/js/helpers.js"></script>
@@ -119,13 +127,7 @@
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="{{asset('tinymce/tinymce.min.js')}}"></script>
-<script>
-    tinymce.init({
-        selector: 'textarea'
-    });
 
-</script>
 
 <script>
     let errors = @json($errors->all());
