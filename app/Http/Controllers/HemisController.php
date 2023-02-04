@@ -11,7 +11,7 @@ class HemisController extends Controller
     public function login(){
 
         if (session()->has('loggedin')) {
-            return redirect()->route('themes');
+            return redirect()->route('process');
         }else{
             return view('hemis.login');
         }
@@ -24,7 +24,7 @@ class HemisController extends Controller
         ]);
         try {
             if(HemisService::login($request->login,$request->password)){
-                return redirect()->route('profile');
+                return redirect()->route('process');
             }
         }catch (\Exception $exception){
             return redirect()->route('login-student')->withErrors('Login yoki parol xato !');

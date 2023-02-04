@@ -28,6 +28,7 @@ class HemisService
             session()->put('hemistoken',$a->data->token);
             session()->put('loggedin',true);
         }
+        self::getMe();
         return $a->success;
 
     }

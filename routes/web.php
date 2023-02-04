@@ -15,7 +15,7 @@ Route::get('login-student',[\App\Http\Controllers\HemisController::class,'login'
 Route::post('login-student-user',[\App\Http\Controllers\HemisController::class,'loginUser'])->name('login-student-user');
 
 Route::middleware('hemis')->group(function(){
-    Route::get('logout',[\App\Http\Controllers\HemisController::class,'logout'])->name('logout');
+    Route::get('logout-student',[\App\Http\Controllers\HemisController::class,'logout'])->name('logout-student');
     Route::get('profile',[\App\Http\Controllers\HemisController::class,'profile'])->name('profile');
     Route::get('themes',[\App\Http\Controllers\ThemeController::class,'index'])->name('themes');
     Route::post('store-theme',[\App\Http\Controllers\ThemeController::class,'store'])->name('store-theme');
@@ -28,5 +28,6 @@ Route::middleware('hemis')->group(function(){
 
 
 });
+require_once __DIR__.'/auth.php';
 
 

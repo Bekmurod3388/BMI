@@ -59,7 +59,7 @@
                             <span class="align-middle">Profil</span>
                         </a>
                     </li><li>
-                        <a class="dropdown-item" href="{{route('logout')}}">
+                        <a class="dropdown-item" href="{{route('logout-student')}}">
                             <i class="bx bx-power-off me-2"></i>
                             <span class="align-middle">Chiqish</span>
                         </a>
