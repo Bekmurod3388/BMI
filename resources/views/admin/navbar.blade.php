@@ -30,7 +30,7 @@
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                        <img src="{{session('hemisimage')}}" alt class="w-px-40 h-auto rounded-circle" />
+                        <img src="@if(auth()->check()) {{asset('user.jpg')}} @else {{session('hemisimage')}}  @endif" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
@@ -39,11 +39,17 @@
                             <div class="d-flex">
                                 <div class="flex-shrink-0 me-3">
                                     <div class="avatar avatar-online">
-                                        <img src="{{session('hemisimage')}}" alt class="w-px-40 h-auto rounded-circle" />
+                                        <img src="@if(auth()->check()) {{asset('user.jpg')}} @else {{session('hemisimage')}}  @endif" alt class="w-px-40 h-auto rounded-circle" />
                                     </div>
                                 </div>
                                 <div class="flex-grow-1">
-                                    <span class="fw-semibold d-block">{{session('hemisshortname')}}</span>
+                                    <span class="fw-semibold d-block">
+                                        @if(auth()->check())
+                                            {{auth()->user()->name}}
+                                        @else
+                                            {{session('hemisshortname')}}
+                                        @endif
+                                    </span>
                                 </div>
                             </div>
                         </a>
@@ -54,15 +60,29 @@
                     </li>
 
                     <li>
-                        <a class="dropdown-item" href="{{route('profile')}}">
-                            <i class="bx bx-user me-2"></i>
-                            <span class="align-middle">Profil</span>
-                        </a>
+                        @if(auth()->check())
+
+                        @else
+                            <a class="dropdown-item" href="{{route('profile')}}">
+                                <i class="bx bx-user me-2"></i>
+                                <span class="align-middle">Profil</span>
+                            </a>
+                        @endif
                     </li><li>
+                        @if(auth()->check())
+                            <form action="{{route('logout')}}" method="post" >@csrf
+                        <button type="submit" class="dropdown-item" href="{{route('logout')}}">
+                            <i class="bx bx-power-off me-2"></i>
+                            <span class="align-middle">Chiqish</span>
+                        </button>
+                            </form>
+
+                        @else
                         <a class="dropdown-item" href="{{route('logout-student')}}">
                             <i class="bx bx-power-off me-2"></i>
                             <span class="align-middle">Chiqish</span>
                         </a>
+                        @endif
                     </li>
                 </ul>
             </li>

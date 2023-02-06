@@ -1,4 +1,3 @@
-
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
         <a href="#" class="app-brand-link">
@@ -68,32 +67,44 @@
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1">
-        <!-- Dashboard -->
-        <li class="menu-item active ">
-            <a href="#" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Dashboard</div>
-            </a>
-        </li>
+        @if(auth()->user()->role=='mudir')
+            <!-- Dashboard -->
+            <li class="menu-item active ">
+                <a href="#" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                    <div data-i18n="Analytics">Dashboard</div>
+                </a>
+            </li>
+            <li class="menu-item active ">
+                <a href="#" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                    <div data-i18n="Analytics">O'qituvchilar</div>
+                </a>
+            </li>
+        @endif
         <li class="menu-item active ">
             <a href="{{route('themes')}}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-book"></i>
                 <div data-i18n="Analytics">Mavzular</div>
             </a>
         </li>
-        <li class="menu-item active ">
-            <a href="{{route('processes')}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-book"></i>
-                <div data-i18n="Analytics">Jarayonlar</div>
-            </a>
-        </li>
-        <li class="menu-item active ">
-            <a href="{{route('process')}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-book"></i>
-                <div data-i18n="Analytics">Jarayon</div>
-            </a>
-        </li>
 
+
+        @if(auth()->check())
+            <li class="menu-item active ">
+                <a href="{{route('processes')}}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-book"></i>
+                    <div data-i18n="Analytics">Jarayonlar</div>
+                </a>
+            </li>
+        @else
+            <li class="menu-item active ">
+                <a href="{{route('process')}}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-book"></i>
+                    <div data-i18n="Analytics">Jarayon</div>
+                </a>
+            </li>
+        @endif
 
 
     </ul>

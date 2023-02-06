@@ -8,20 +8,29 @@ use Illuminate\Http\Request;
 
 class ProcessController extends Controller
 {
-    public function index(){
-        $processes=Process::all();
+    public function index()
+    {
+        $processes = Process::all();
 
-        return view('admin.processes.index',compact('processes'));
+        return view('admin.processes.index', compact('processes'));
     }
-    public function student_index(){
-        $theme=Theme::all()
-            ->where('student_id',session('hemisaboutme')->student_id_number)
+
+    public function student_index()
+    {
+
+        $theme = Theme::all()
+            ->where('student_id', session('hemisaboutme')->student_id_number)
             ->first();
 
-        $process=Process::all()
-            ->where('theme_id',$theme->id)
+
+        if ($theme == null) {
+            return redirect()->route('themes');
+        }
+
+        $process = Process::all()
+            ->where('theme_id', $theme->id)
             ->first();
 
-        return view('admin.processes.student_index',compact('process'));
+        return view('admin.processes.student_index', compact('process'));
     }
 }

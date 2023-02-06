@@ -22,7 +22,7 @@ return new class extends Migration
             $table->bigInteger('student_id')->unsigned()->default(0);
             $table->string('student_name')->nullable();
             $table->string('group_name')->nullable();
-            $table->bigInteger('teacher_id')->unsigned()->default(0);
+            $table->foreignId('teacher_id')->constrained('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
