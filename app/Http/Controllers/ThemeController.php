@@ -11,7 +11,14 @@ class ThemeController extends Controller
 {
     public function index()
     {
-        $themes = Theme::all();
+        if (session()->has('loggedin')){
+            $themes=Theme::all()
+                ->where('student_id',0)
+                ->where('level',session('hemisaboutme')->level->name)
+                ->where('specialty',session('hemisaboutme')->specialty->code);
+        }else{
+            $themes=Theme::all()->where('teacher_id',auth()->user()->id);
+        }
         return view('admin.themes.index', compact('themes'));
     }
 
@@ -23,7 +30,7 @@ class ThemeController extends Controller
             'specialty' => 'required',
             'level' => 'required',
         ]);
-        //TODO teacher profili bn kirilganda teacher id ni berib yuborish kerak leki  hozircha techaer id 0 ga teng, login , parol yo'qligi uchun
+
         try {
             ThemeService::create($request->name, $request->description, $request->specialty, $request->level, auth()->user()->id);
             return redirect()->route('themes')->with('msg', 'Mavzu muvaffaqiyatli yaratildi');
@@ -67,15 +74,22 @@ class ThemeController extends Controller
     public function getTheme($id)
     {
         $theme = Theme::find($id);
-        $theme->group_name = session('hemisaboutme')->group->name;
-        $theme->student_name = session('hemisaboutme')->second_name . ' ' . session('hemisaboutme')->first_name . ' ' . session('hemisaboutme')->third_name;
-        $theme->student_id = session('hemisaboutme')->student_id_number;
-        $theme->save();
-        $process = new Process();
-        $process->theme_id = $id;
-        $process->save();
-        return redirect()->route('themes')->with('msg', 'Mavzu tanlandi');
-
+        if ($theme->student_id==0 ){
+            if (Theme::all()->where('student_id', '=', session('hemisaboutme')->student_id_number)->count() ==0){
+                $theme->group_name = session('hemisaboutme')->group->name;
+                $theme->student_name = session('hemisaboutme')->second_name . ' ' . session('hemisaboutme')->first_name . ' ' . session('hemisaboutme')->third_name;
+                $theme->student_id = session('hemisaboutme')->student_id_number;
+                $theme->save();
+                $process = new Process();
+                $process->theme_id = $id;
+                $process->save();
+                return redirect()->route('process')->with('msg', 'Mavzu tanlandi');
+            }else{
+                return redirect()->route('themes')->withErrors("Siz boshqa mavzuni tanlab bo'lgansiz");
+            }
+        }else{
+            return redirect()->route('themes')->withErrors("Bu mavzu boshqa talaba tomonidan tanlangan");
+        }
 
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Process;
 use App\Models\Theme;
+use App\Services\ProcessService;
 use Illuminate\Http\Request;
 
 class ProcessController extends Controller
@@ -32,5 +33,25 @@ class ProcessController extends Controller
             ->first();
 
         return view('admin.processes.student_index', compact('process'));
+    }
+
+    public function update(Request $request)
+    {
+        $request->validate([
+            'id' => 'required',
+        ]);
+
+        try {
+            ProcessService::update($request->id, $request->file, $request->desc, $request->link );
+            return redirect()->route('process')->with('msg', 'Jarayon muvaffaqiyatli yangilandi');
+
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors('Link xato kiritildi yoki mavjud emas. Quyidagi formatda kiriting: https://github.com/kimdir/nimadir');
+        }
+    }
+
+    public function showProcess($id){
+        $process = Process::find($id);
+        return view('admin.processes.show', compact('process'));
     }
 }

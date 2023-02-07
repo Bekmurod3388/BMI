@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->default("-");
+            $table->string('status')->default('new');
             $table->string('specialty')->nullable();
             $table->string('level')->nullable();
             $table->bigInteger('student_id')->unsigned()->default(0);

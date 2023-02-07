@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('processes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('theme_id')->constrained('themes')->onDelete('cascade');
-            $table->string('status')->default('yangi');
             $table->text('content')->nullable();
             $table->string('file')->nullable();
             $table->string('link')->nullable();

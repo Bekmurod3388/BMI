@@ -23,34 +23,45 @@
                                     class="btn btn-success">Batafsil
                             </button>
                             @if(auth()->check())
-                                <button data-bs-toggle="modal" data-bs-target="#editModal{{$theme->id}}" type="button"
-                                        class="btn btn-warning"><i class="bx bx-pencil"></i></button>
-                                <button data-bs-toggle="modal" data-bs-target="#deleteModal{{$theme->id}}" type="button"
-                                        class="btn btn-danger"><i class="bx bx-trash"></i></button>
+                                @if($theme->student_id == 0)
+                                    <button data-bs-toggle="modal" data-bs-target="#editModal{{$theme->id}}" type="button"
+                                            class="btn btn-warning"><i class="bx bx-pencil"></i></button>
+                                    <button data-bs-toggle="modal" data-bs-target="#deleteModal{{$theme->id}}" type="button"
+                                            class="btn btn-danger"><i class="bx bx-trash"></i></button>
+                                @else
+                                    <a href="{{route('show-process',$theme->process->id)}}" class="btn btn-info">Jarayonda</a>
+                                @endif
+
                             @endif
                         </td>
                         <td>{{$theme->name}}</td>
                     </tr>
                     <!-- Modal batafsil  -->
-                    <div class="modal fade" id="batafsilModal{{$theme->id}}" tabindex="-1"
+                    <div  class="modal fade" id="batafsilModal{{$theme->id}}" tabindex="-1"
                          aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
-                            <div class="modal-content">
+                            <div style="" class="modal-content">
                                 <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Tanlangan mavzuni o'zgartira
+                                    @if(auth()->check())
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Mavzu haqida ma'lumot</h1>
+                                    @else
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Tanlangan mavzuni o'zgartira
                                         olmaysiz, shu mavzuni tanlaysizmi ?</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    @endif
+
+
+                                    <button type="button" class="btn-close "  data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                 </div>
                                 <form action="{{route('get-theme',$theme->id)}}" method="get">
 
                                     <div class="modal-body">
 
-                                        <div class="mb-3">
+                                        <div class="mb-3 border-primary " >
                                             <label for="name" class="form-label">Mavzu nomi</label>
                                             <p>{{$theme->name}}</p>
                                         </div>
-                                        <div class="mb-3">
+                                        <div class="mb-3" >
                                             <label for="description" class="form-label">Izoh</label>
                                             <p>{!! $theme->description!!}</p>
                                         </div>

@@ -15,13 +15,14 @@ Route::middleware('hemis')->group(function () {
     Route::post('store-theme', [\App\Http\Controllers\ThemeController::class, 'store'])->name('store-theme');
     Route::post('update-theme', [\App\Http\Controllers\ThemeController::class, 'update'])->name('update-theme');
     Route::post('delete-theme', [\App\Http\Controllers\ThemeController::class, 'delete'])->name('delete-theme');
-    Route::get('processes', [\App\Http\Controllers\ProcessController::class, 'index'])->name('processes');
+    Route::get('show-process/{id}', [\App\Http\Controllers\ProcessController::class, 'showProcess'])->name('show-process');
 
     Route::get('get-theme/{id}', [\App\Http\Controllers\ThemeController::class, 'getTheme'])->name('get-theme');
     Route::get('/', function () {
         return redirect()->route('themes');
     });
     Route::get('process', [\App\Http\Controllers\ProcessController::class, 'student_index'])->name('process');
+    Route::post('update-process', [\App\Http\Controllers\ProcessController::class, 'update'])->name('update-process');
 
 
 });

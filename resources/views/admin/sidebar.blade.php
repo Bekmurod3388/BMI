@@ -67,7 +67,8 @@
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1">
-        @if(auth()->user()->role=='mudir')
+        @if(auth()->check())
+            @if(auth()->user()->role=='admin')
             <!-- Dashboard -->
             <li class="menu-item active ">
                 <a href="#" class="menu-link">
@@ -81,6 +82,7 @@
                     <div data-i18n="Analytics">O'qituvchilar</div>
                 </a>
             </li>
+            @endif
         @endif
         <li class="menu-item active ">
             <a href="{{route('themes')}}" class="menu-link">
@@ -91,12 +93,7 @@
 
 
         @if(auth()->check())
-            <li class="menu-item active ">
-                <a href="{{route('processes')}}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-book"></i>
-                    <div data-i18n="Analytics">Jarayonlar</div>
-                </a>
-            </li>
+
         @else
             <li class="menu-item active ">
                 <a href="{{route('process')}}" class="menu-link">
