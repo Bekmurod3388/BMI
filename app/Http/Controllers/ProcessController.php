@@ -54,4 +54,7 @@ class ProcessController extends Controller
         $process = Process::find($id);
         return view('admin.processes.show', compact('process'));
     }
+
+
+
 }

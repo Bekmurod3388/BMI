@@ -17,6 +17,9 @@ class ThemeController extends Controller
                 ->where('level',session('hemisaboutme')->level->name)
                 ->where('specialty',session('hemisaboutme')->specialty->code);
         }else{
+            if (auth()->user()->role=='mudir')
+                $themes=Theme::all();
+            else
             $themes=Theme::all()->where('teacher_id',auth()->user()->id);
         }
         return view('admin.themes.index', compact('themes'));

@@ -68,28 +68,28 @@
 
     <ul class="menu-inner py-1">
         @if(auth()->check())
-            @if(auth()->user()->role=='admin')
-            <!-- Dashboard -->
+            @if(auth()->user()->role=='mudir')
+
             <li class="menu-item active ">
-                <a href="#" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                    <div data-i18n="Analytics">Dashboard</div>
-                </a>
-            </li>
-            <li class="menu-item active ">
-                <a href="#" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <a href="{{route('teachers.index')}}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-user-circle"></i>
                     <div data-i18n="Analytics">O'qituvchilar</div>
                 </a>
             </li>
+            <li class="menu-item active ">
+                <a href="{{route('students.index')}}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-user-circle"></i>
+                    <div data-i18n="Analytics">Mavzular</div>
+                </a>
+
             @endif
         @endif
-        <li class="menu-item active ">
-            <a href="{{route('themes')}}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-book"></i>
-                <div data-i18n="Analytics">Mavzular</div>
-            </a>
-        </li>
+            <li class="menu-item active ">
+                <a href="{{route('themes')}}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-book"></i>
+                    <div data-i18n="Analytics">Mavzular</div>
+                </a>
+            </li>
 
 
         @if(auth()->check())
