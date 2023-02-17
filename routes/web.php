@@ -7,6 +7,7 @@ use App\Http\Controllers\{
     ThemeController,
     ProcessController,
     ProfileController,
+    MudirController,
 };
 
 
@@ -19,6 +20,7 @@ Route::middleware('hemis')->group(function () {
     Route::get('themes', [ThemeController::class, 'index'])->name('themes');
     
     Route::resource('teachers',TeacherController::class);
+    Route::get('mudir-themes', [MudirController::class, 'themes'])->name('mudir-themes');
 
     Route::post('store-theme', [ThemeController::class, 'store'])->name('store-theme');
     Route::post('update-theme', [ThemeController::class, 'update'])->name('update-theme');
@@ -27,7 +29,10 @@ Route::middleware('hemis')->group(function () {
 
     Route::get('get-theme/{id}', [ThemeController::class, 'getTheme'])->name('get-theme');
     Route::get('/', function () {
-        return redirect()->route('themes');
+        if (auth()->user()->role=='mudir')
+            return redirect()->route('mudir-themes');
+        else
+            return redirect()->route('themes');
     });
     Route::get('process', [ProcessController::class, 'student_index'])->name('process');
     Route::post('update-process', [ProcessController::class, 'update'])->name('update-process');

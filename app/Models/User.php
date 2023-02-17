@@ -17,6 +17,10 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    public function themes()
+    {
+        return $this->hasMany(Theme::class, 'teacher_id');
+    }
     protected $fillable = [
         'name',
         'email',

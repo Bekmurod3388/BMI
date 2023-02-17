@@ -77,24 +77,33 @@
                 </a>
             </li>
             <li class="menu-item active ">
-                <a href="{{route('students.index')}}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-user-circle"></i>
-                    <div data-i18n="Analytics">Mavzular</div>
-                </a>
-
-            @endif
-        @endif
-            <li class="menu-item active ">
-                <a href="{{route('themes')}}" class="menu-link">
+                <a href="{{route('mudir-themes')}}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-book"></i>
                     <div data-i18n="Analytics">Mavzular</div>
                 </a>
-            </li>
+
+            @else
+                <li class="menu-item active ">
+                    <a href="{{route('themes')}}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-book"></i>
+                        <div data-i18n="Analytics">Mavzular</div>
+                    </a>
+                </li>
+            @endif
+        @endif
+
+
 
 
         @if(auth()->check())
 
         @else
+                <li class="menu-item active ">
+                    <a href="{{route('themes')}}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-book"></i>
+                        <div data-i18n="Analytics">Mavzular</div>
+                    </a>
+                </li>
             <li class="menu-item active ">
                 <a href="{{route('process')}}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-book"></i>

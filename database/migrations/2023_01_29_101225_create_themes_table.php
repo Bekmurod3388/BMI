@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('status')->default('new');
             $table->string('specialty')->nullable();
             $table->string('level')->nullable();
+            $table->string('semester')->nullable();
             $table->bigInteger('student_id')->unsigned()->default(0);
             $table->string('student_name')->nullable();
             $table->string('group_name')->nullable();

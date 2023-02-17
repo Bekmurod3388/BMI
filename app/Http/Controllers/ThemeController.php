@@ -13,14 +13,15 @@ class ThemeController extends Controller
     {
         if (session()->has('loggedin')){
             $themes=Theme::all()
-                ->where('student_id',0)
+                ->where('specialty',session('hemisaboutme')->specialty->code)
                 ->where('level',session('hemisaboutme')->level->name)
-                ->where('specialty',session('hemisaboutme')->specialty->code);
+                ->where('semester',session('hemisaboutme')->semester->name)
+                ->where('student_id',0);
         }else{
             if (auth()->user()->role=='mudir')
                 $themes=Theme::all();
             else
-            $themes=Theme::all()->where('teacher_id',auth()->user()->id);
+                $themes=Theme::all()->where('teacher_id',auth()->user()->id);
         }
         return view('admin.themes.index', compact('themes'));
     }
@@ -32,10 +33,11 @@ class ThemeController extends Controller
             'description' => 'required',
             'specialty' => 'required',
             'level' => 'required',
+            'semester' => 'required',
         ]);
 
         try {
-            ThemeService::create($request->name, $request->description, $request->specialty, $request->level, auth()->user()->id);
+            ThemeService::create($request->name, $request->description, $request->specialty, $request->level, $request->semester, auth()->user()->id);
             return redirect()->route('themes')->with('msg', 'Mavzu muvaffaqiyatli yaratildi');
 
         } catch (\Exception $e) {
@@ -50,9 +52,10 @@ class ThemeController extends Controller
             'description' => 'required',
             'specialty' => 'required',
             'level' => 'required',
+            'semester' => 'required',
         ]);
         try {
-            ThemeService::update($request->id, $request->name, $request->description, $request->specialty, $request->level);
+            ThemeService::update($request->id, $request->name, $request->description, $request->specialty, $request->level, $request->semester);
             return redirect()->route('themes')->with('msg', 'Mavzu muvaffaqiyatli yangilandi');
 
         } catch (\Exception $e) {
@@ -82,6 +85,7 @@ class ThemeController extends Controller
                 $theme->group_name = session('hemisaboutme')->group->name;
                 $theme->student_name = session('hemisaboutme')->second_name . ' ' . session('hemisaboutme')->first_name . ' ' . session('hemisaboutme')->third_name;
                 $theme->student_id = session('hemisaboutme')->student_id_number;
+                $theme->status = 'process';
                 $theme->save();
                 $process = new Process();
                 $process->theme_id = $id;

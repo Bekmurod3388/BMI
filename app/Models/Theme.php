@@ -12,6 +12,13 @@ class Theme extends Model
         return $this->belongsTo(User::class,'teacher_id');
     }
     public function process(){
-        return $this->hasOne(Process::class,'theme_id');
+        return $this->hasOne(Process::class,'theme_id')->withDefault(
+           [
+               'content'=>'Hozircha kiritilmagan',
+               'link'=>'Hozircha kiritilmagan',
+               'file'=>'Hozircha kiritilmagan',
+
+           ]
+        );
     }
 }

@@ -129,6 +129,15 @@
                                             </select>
                                         </div>
                                         <div class="mb-3">
+                                            <label for="name" class="form-label">Qaysi semestr uchun</label>
+                                            <select class="form-select" required name="semester" aria-label="Default select example">
+                                                <option @if($theme->semester =='5-semetr') selected @endif value="5-semestr">5-semestr</option>
+                                                <option @if($theme->semester =='6-semetr') selected @endif  value="6-semestr">6-semestr</option>
+                                                <option @if($theme->semester =='7-semetr') selected @endif  value="7-semestr">7-semestr</option>
+                                                <option @if($theme->semester =='8-semetr') selected @endif  value="8-semestr">8-semestr</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-3">
                                             <label for="name" class="form-label">Mavzu nomi</label>
                                             <input type="text" value="{{$theme->name}}" required name="name"
                                                    class="form-control" id="name" placeholder="Mavzu nomini kiriting">
@@ -210,6 +219,15 @@
                             <select class="form-select" required name="level" aria-label="Default select example">
                                 <option value="3-kurs">3-kurs</option>
                                 <option value="4-kurs">4-kurs</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Qaysi semestr uchun</label>
+                            <select class="form-select" required name="semester" aria-label="Default select example">
+                                <option value="5-semestr">5-semestr</option>
+                                <option value="6-semestr">6-semestr</option>
+                                <option value="7-semestr">7-semestr</option>
+                                <option value="8-semestr">8-semestr</option>
                             </select>
                         </div>
                         <div class="mb-3">

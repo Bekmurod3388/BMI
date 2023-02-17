@@ -6,7 +6,7 @@ use App\Models\Theme;
 
 class ThemeService
 {
-    public static function create($name, $description, $specialty, $level, $teacher_id)
+    public static function create($name, $description, $specialty, $level,$semester, $teacher_id)
     {
         $theme = new Theme();
         $theme->name = $name;
@@ -14,6 +14,7 @@ class ThemeService
         $theme->teacher_id = $teacher_id;
         $theme->specialty = $specialty;
         $theme->level = $level;
+        $theme->semester = $semester;
         $theme->save();
         return $theme;
     }
@@ -21,7 +22,7 @@ class ThemeService
     /**
      * @throws \Exception
      */
-    public static function update($id, $name, $description, $specialty, $level)
+    public static function update($id, $name, $description, $specialty, $level,$semester)
     {
         $theme = Theme::find($id);
         if ($theme->student_id != 0) {
@@ -31,6 +32,7 @@ class ThemeService
         $theme->description = $description;
         $theme->specialty = $specialty;
         $theme->level = $level;
+        $theme->semester = $semester;
         $theme->save();
         return $theme;
     }
