@@ -26,39 +26,51 @@
                     </tr>
                     <tr>
                         <th>
+
                             <select name="semester" class="form-select" id="select0">
-                                <option value="0">Barchasi</option>
-                                <option value="5-semestr">5-semestr</option>
-                                <option value="6-semestr">6-semestr</option>
-                                <option value="7-semestr">7-semestr</option>
-                                <option value="8-semestr">8-semestr</option>
+                                <option selected value="0">Barchasi</option>
+                                <option @if($options->semester=="5-semestr") selected @endif value="5-semestr">
+                                    5-semestr
+                                </option>
+                                <option @if($options->semester=="6-semestr") selected @endif value="6-semestr">
+                                    6-semestr
+                                </option>
+                                <option @if($options->semester=="7-semestr") selected @endif value="7-semestr">
+                                    7-semestr
+                                </option>
+                                <option @if($options->semester=="8-semestr") selected @endif value="8-semestr">
+                                    8-semestr
+                                </option>
                             </select>
                         </th>
                         <th>
 
                             <select name="group_name" class="form-select" id="select1">
-                                <option value="0">Barchasi</option>
+                                <option selected value="0">Barchasi</option>
                                 @foreach($groups as $key=>$group)
-                                    <option value="{{$group}}">{{$group}}</option>
+                                    <option @if($options->group_name==$group) selected
+                                            @endif value="{{$group}}">{{$group}}</option>
                                 @endforeach
                             </select>
                         </th>
                         <th>
 
                             <select name="teacher_id" class="form-select" id="select2">
-                                <option value="0">Barchasi</option>
+                                <option selected value="0">Barchasi</option>
                                 @foreach($teachers as $id=>$teacher)
-                                    <option value="{{$id}}">{{$teacher}}</option>
+                                    <option @if($options->teacher_id==$id) selected
+                                            @endif value="{{$id}}">{{$teacher}}</option>
                                 @endforeach
                             </select>
                         </th>
                         <th>
 
                             <select name="status" class="form-select" id="select3">
-                                <option value="0">Barchasi</option>
-                                <option value="new">Yangi</option>
-                                <option value="process">Jarayonda</option>
-                                <option value="end">Topshirilgan</option>
+                                <option selected value="0">Barchasi</option>
+                                <option @if($options->status=="new") selected @endif value="new">Yangi</option>
+                                <option @if($options->status=="process") selected @endif value="process">Jarayonda
+                                </option>
+                                <option @if($options->status=="end") selected @endif value="end">Topshirilgan</option>
                             </select>
                         </th>
                         <th>
@@ -185,6 +197,15 @@
                     </tr>
                 @endforeach
             </table>
+            <div class="mt-3">
+                {{ $themes->appends([
+                    'semester' => $options->semester,
+                    'group_name' => $options->group_name,
+                    'teacher_id'=> $options->teacher_id,
+                    'status' => $options->status,
+                    ])->links() }}
+
+            </div>
         </div>
     </div>
 @endsection

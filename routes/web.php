@@ -21,6 +21,7 @@ Route::middleware('hemis')->group(function () {
     
     Route::resource('teachers',TeacherController::class);
     Route::get('mudir-themes', [MudirController::class, 'themes'])->name('mudir-themes');
+    Route::get('filtered-themes', [MudirController::class, 'filteredThemes'])->name('filtered-themes');
 
     Route::post('store-theme', [ThemeController::class, 'store'])->name('store-theme');
     Route::post('update-theme', [ThemeController::class, 'update'])->name('update-theme');

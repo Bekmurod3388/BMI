@@ -20,7 +20,7 @@
                     <tr class="align-items-center">
                         <td class="">
                             <button data-bs-toggle="modal" data-bs-target="#batafsilModal{{$theme->id}}" type="button"
-                                    class="btn btn-success">Batafsil
+                                    class="btn btn-outline-dark">Batafsil
                             </button>
                             @if(auth()->check())
                                 @if($theme->student_id == 0)
@@ -41,7 +41,7 @@
                          aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div style="" class="modal-content">
-                                <div class="modal-header">
+                                <div class="modal-header border-top border-2" style="border-color: darkblue" >
                                     @if(auth()->check())
                                         <h1 class="modal-title fs-5" id="exampleModalLabel">Mavzu haqida ma'lumot</h1>
                                     @else
@@ -57,11 +57,11 @@
 
                                     <div class="modal-body">
 
-                                        <div class="mb-3 border-primary " >
+                                        <div class="card mb-3  border-primary border-top border p-2 border-2 " >
                                             <label for="name" class="form-label">Mavzu nomi</label>
                                             <p>{{$theme->name}}</p>
                                         </div>
-                                        <div class="mb-3" >
+                                        <div class="card mb-3  border-primary border-top border p-2 border-2 " >
                                             <label for="description" class="form-label">Izoh</label>
                                             <p>{!! $theme->description!!}</p>
                                         </div>
