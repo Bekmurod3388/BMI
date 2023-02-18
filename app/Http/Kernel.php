@@ -65,5 +65,8 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'hemis'=>HemisLogin::class,
+        'mudir'=>\App\Http\Middleware\Mudir::class,
+        'teacher'=>\App\Http\Middleware\Teacher::class,
+        'without_mudir'=>\App\Http\Middleware\WithoutMudir::class,
     ];
 }

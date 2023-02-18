@@ -10,34 +10,45 @@ use App\Http\Controllers\{
     MudirController,
 };
 
+Route::get('/', function () {
+    if (auth()->check()){
+        if (auth()->user()->role=='mudir')
+            return redirect()->route('mudir-themes');
+        else
+            return redirect()->route('themes');
+    }
+    else
+        return redirect()->route('themes');
+});
 
 Route::get('login-student', [HemisController::class, 'login'])->name('login-student');
 Route::post('login-student-user', [HemisController::class, 'loginUser'])->name('login-student-user');
 
 Route::middleware('hemis')->group(function () {
-    Route::get('logout-student', [HemisController::class, 'logout'])->name('logout-student');
-    Route::get('profile', [HemisController::class, 'profile'])->name('profile');
-    Route::get('themes', [ThemeController::class, 'index'])->name('themes');
-    
-    Route::resource('teachers',TeacherController::class);
-    Route::get('mudir-themes', [MudirController::class, 'themes'])->name('mudir-themes');
-    Route::get('filtered-themes', [MudirController::class, 'filteredThemes'])->name('filtered-themes');
 
-    Route::post('store-theme', [ThemeController::class, 'store'])->name('store-theme');
-    Route::post('update-theme', [ThemeController::class, 'update'])->name('update-theme');
-    Route::post('delete-theme', [ThemeController::class, 'delete'])->name('delete-theme');
-    Route::get('show-process/{id}', [ProcessController::class, 'showProcess'])->name('show-process');
-
-    Route::get('get-theme/{id}', [ThemeController::class, 'getTheme'])->name('get-theme');
-    Route::get('/', function () {
-        if (auth()->user()->role=='mudir')
-            return redirect()->route('mudir-themes');
-        else
-            return redirect()->route('themes');
+    Route::middleware('without_mudir')->group(function (){
+        Route::get('logout-student', [HemisController::class, 'logout'])->name('logout-student');
+        Route::get('profile', [HemisController::class, 'profile'])->name('profile');
+        Route::get('themes', [ThemeController::class, 'index'])->name('themes');
+        Route::get('get-theme/{id}', [ThemeController::class, 'getTheme'])->name('get-theme');
+        Route::get('process', [ProcessController::class, 'student_index'])->name('process');
+        Route::post('update-process', [ProcessController::class, 'update'])->name('update-process');
+        Route::get('show-process/{id}', [ProcessController::class, 'showProcess'])->name('show-process');
     });
-    Route::get('process', [ProcessController::class, 'student_index'])->name('process');
-    Route::post('update-process', [ProcessController::class, 'update'])->name('update-process');
-    
+
+
+    Route::middleware('mudir')->group(function(){
+        Route::resource('teachers',TeacherController::class);
+        Route::get('mudir-themes', [MudirController::class, 'themes'])->name('mudir-themes');
+        Route::get('filtered-themes', [MudirController::class, 'filteredThemes'])->name('filtered-themes');
+    });
+
+    Route::middleware('teacher')->group(function(){
+        Route::post('store-theme', [ThemeController::class, 'store'])->name('store-theme');
+        Route::post('update-theme', [ThemeController::class, 'update'])->name('update-theme');
+        Route::post('delete-theme', [ThemeController::class, 'delete'])->name('delete-theme');
+    });
+
 
 
 });
