@@ -56,7 +56,7 @@
                   </g>
                 </svg>
               </span>
-            <span class="app-brand-text demo menu-text fw-bolder ms-2">Admin</span>
+            <span class=" demo menu-text fw-bolder ms-2">BMI | Kurs ishi</span>
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
@@ -99,7 +99,7 @@
 
         @else
                 <li class="menu-item active ">
-                    <a href="{{route('themes')}}" class="menu-link">
+                    <a href="{{route('student-themes')}}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-book"></i>
                         <div data-i18n="Analytics">Mavzular</div>
                     </a>

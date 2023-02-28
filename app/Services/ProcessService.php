@@ -3,21 +3,30 @@
 namespace App\Services;
 
 use App\Models\Process;
+use App\Models\Theme;
 
 class ProcessService
 {
     public static function create(){
 
     }
-    public static function update($id, $file=null, $desc=null, $link=null){
+    public static function update($id, $file=null, $desc=null, $link=null, $status=null)
+    {
         $process = Process::find($id);
-        if ($file != null){
+        if ($file != null) {
             $file_name = time() . '_' . $file->getClientOriginalName();
-            $path=$file->storeAs('files', $file_name, 'public');
-            $path='/storage/'.$path;
+            $path = $file->storeAs('files', $file_name, 'public');
+            $path = '/storage/' . $path;
             $process->file = $path;
         }
         $process->content = $desc;
+        if ($status != null){
+
+            $theme = Theme::find($process->theme_id);
+            $theme->status = $status;
+            $theme->save();
+        }
+
         $process->save();
         if ($link != null){
             $headers = get_headers($link);

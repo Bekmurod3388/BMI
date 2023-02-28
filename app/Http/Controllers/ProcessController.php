@@ -25,7 +25,7 @@ class ProcessController extends Controller
 
 
         if ($theme == null) {
-            return redirect()->route('themes');
+            return redirect()->route('student-themes');
         }
 
         $process = Process::all()
@@ -42,11 +42,14 @@ class ProcessController extends Controller
         ]);
 
         try {
-            ProcessService::update($request->id, $request->file, $request->desc, $request->link );
-            return redirect()->route('process')->with('msg', 'Jarayon muvaffaqiyatli yangilandi');
+
+            ProcessService::update($request->id, $request->file, $request->process, $request->link, $request->status );
+
+            return redirect()->back()->with('msg', 'Jarayon muvaffaqiyatli yangilandi');
 
         } catch (\Exception $e) {
             return redirect()->back()->withErrors('Link xato kiritildi yoki mavjud emas. Quyidagi formatda kiriting: https://github.com/kimdir/nimadir');
+//            return redirect()->back()->withErrors($e->getMessage());
         }
     }
 

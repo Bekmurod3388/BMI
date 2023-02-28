@@ -42,12 +42,18 @@
                     <div class="mb-3">
                         <label for="student_textarea " class="fw-bolder badge fs-4 text-primary">Mundarija:</label>
                         <textarea name="process" id="student_textarea" cols="30" rows="10"  class="form-control">
-                        {!!  $process->content !!}
+
+                        {!!   $process->content !!}
+
                     </textarea>
                     </div>
-
-
-
+                    <div class="mb-3">
+                        <label for="statusi" class="fw-bolder badge fs-4 text-primary">Holati:</label>
+                        <select name="status" id="statusi" class="form-select">
+                            <option value="process" @if($process->theme->status=="process") selected @endif>Jarayonda</option>
+                            <option value="end" @if($process->theme->status=="end") selected @endif>Topshirildi</option>
+                        </select>
+                    </div>
 
                     <div class="mb-3">
                         <button type="submit" class="btn btn-primary p-2">O'zgarishlarni saqlash</button>

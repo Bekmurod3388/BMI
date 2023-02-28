@@ -24,7 +24,7 @@
                     <div class="mb-3">
 
                         <label for="student_textarea " class="fw-bolder badge fs-4 text-primary">Mundarija:</label>
-                        <textarea name="desc" id="student_textarea" cols="30" rows="10" class="form-control">
+                        <textarea name="process" id="student_textarea" cols="30" rows="10" class="form-control">
                         {!! $process->content !!}
                     </textarea>
                     </div>

@@ -55,7 +55,7 @@ class MudirController extends Controller
         return view('admin.themes.filtered', compact('groups', 'teachers', 'themes', 'options'));
     }
 
-    public function getGroups()
+    public static function getGroups()
     {
         return Theme::select('group_name')
             ->distinct()
@@ -65,10 +65,10 @@ class MudirController extends Controller
             ->toArray();
     }
 
-    public function getTeachers()
+    public static function getTeachers()
     {
         return User::select('id', 'name')
-            ->where('mudir_id', auth()->user()->id)
+            ->where('mudir_id', auth()->id())
             ->get()
             ->pluck('name', 'id')
             ->toArray();

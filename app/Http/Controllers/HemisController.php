@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Theme;
 use App\Providers\RouteServiceProvider;
 use App\Services\HemisService;
+use App\Services\ThemeService;
 use Illuminate\Http\Request;
 
 class HemisController extends Controller
@@ -44,5 +46,7 @@ class HemisController extends Controller
         }
 
     }
+
+
 
 }

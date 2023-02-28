@@ -11,19 +11,16 @@ class ThemeController extends Controller
 {
     public function index()
     {
-        if (session()->has('loggedin')){
-            $themes=Theme::all()
-                ->where('specialty',session('hemisaboutme')->specialty->code)
-                ->where('level',session('hemisaboutme')->level->name)
-                ->where('semester',session('hemisaboutme')->semester->name)
-                ->where('student_id',0);
-        }else{
-            if (auth()->user()->role=='mudir')
-                $themes=Theme::all();
-            else
-                $themes=Theme::all()->where('teacher_id',auth()->user()->id);
-        }
-        return view('admin.themes.index', compact('themes'));
+        $themes=Theme::all()
+            ->where('teacher_id',auth()->id())
+            ->where('specialty',5330600)
+            ->where('semester','5-semestr');
+        $options = (object)[
+            'specialty' => 5330600,
+            'status' => 0,
+            'semester' => "5-semestr",
+        ];
+        return view('admin.themes.index', compact('themes', 'options',));
     }
 
     public function store(Request $request)
@@ -92,11 +89,70 @@ class ThemeController extends Controller
                 $process->save();
                 return redirect()->route('process')->with('msg', 'Mavzu tanlandi');
             }else{
-                return redirect()->route('themes')->withErrors("Siz boshqa mavzuni tanlab bo'lgansiz");
+                return redirect()->route('student-themes')->withErrors("Siz boshqa mavzuni tanlab bo'lgansiz");
             }
         }else{
-            return redirect()->route('themes')->withErrors("Bu mavzu boshqa talaba tomonidan tanlangan");
+            return redirect()->route('student-themes')->withErrors("Bu mavzu boshqa talaba tomonidan tanlangan");
         }
 
+    }
+//for teacher
+    public function filter(Request $request)
+    {
+        $request->validate([
+            'specialty' => 'required',
+            'semester' => 'required',
+            'status' => 'required',
+        ]);
+        $themes=Theme::all()
+            ->where('teacher_id',auth()->id())
+        ->when($request->specialty, function ($query) use ($request) {
+            return $query->where('specialty', $request->specialty);
+        })
+        ->when($request->semester, function ($query) use ($request) {
+            return $query->where('semester', $request->semester);
+        })
+        ->when($request->status != 0, function ($query) use ($request) {
+            return $query->where('status', $request->status);
+        });
+        $options = (object)[
+            'specialty' => $request->specialty,
+            'status' => $request->status,
+            'semester' => $request->semester,
+        ];
+
+
+
+        return view('admin.themes.index', compact('themes','options'));
+    }
+//for student
+    public function themes(){
+
+        $themes=Theme::all()
+            ->where('specialty',session('hemisaboutme')->specialty->code)
+            ->where('level',session('hemisaboutme')->level->name)
+            ->where('semester',session('hemisaboutme')->semester->name)
+            ->where('student_id',0);
+
+        $options = (object)[
+            'semester' => session('hemisaboutme')->semester->name,
+
+        ];
+        return view('admin.themes.student',compact('themes','options'));
+    }
+    public function themesFilter(Request $request){
+        $request->validate([
+            'semester'=>'required'
+        ]);
+        $themes=Theme::all()
+            ->where('specialty',session('hemisaboutme')->specialty->code)
+            ->where('level',session('hemisaboutme')->level->name)
+            ->where('semester',$request->semester)
+            ->where('student_id',0);
+
+        $options = (object)[
+            'semester' => $request->semester,
+        ];
+        return view('admin.themes.student',compact('themes','options'));
     }
 }

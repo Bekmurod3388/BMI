@@ -1,13 +1,95 @@
 @extends('admin.master')
 @section('content')
     <div class="card m-2 p-2" style="box-shadow: 0px 0px 5px 5px rgba(194,215,236,0.63)">
-        <div class="card-header d-flex justify-content-between">
-            <h1 class="text text-center text-dark">Mavzular ro'yhati</h1>
-            @if(auth()->check())
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
-                    <i class="bx bx-plus"></i> Qo'shish
-                </button>
-            @endif
+
+        <div class="card-header  ">
+
+
+            <form action="{{route('filtered-teacher-themes')}}" style="margin-right: -30px; margin-top: -20px;" method="get"
+                  class="form-group  float-end ">
+
+
+                <table class="text-center">
+
+                    <tr>
+                        <th>
+                            <label for="select0">Semestr</label>
+                        </th>
+                        <th>
+                            <label for="select1">Yo'nalish</label>
+                        </th>
+                        <th>
+                            <label for="select3">Holat</label>
+                        </th>
+
+                        <th>
+                            <label for="select4">Amal</label>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>
+
+                            <select name="semester" class="form-select" id="select0">
+                                <option @if($options->semester=="5-semestr") selected @endif value="5-semestr">
+                                    5-semestr
+                                </option>
+                                <option @if($options->semester=="6-semestr") selected @endif value="6-semestr">
+                                    6-semestr
+                                </option>
+                                <option @if($options->semester=="7-semestr") selected @endif value="7-semestr">
+                                    7-semestr
+                                </option>
+                                <option @if($options->semester=="8-semestr") selected @endif value="8-semestr">
+                                    8-semestr
+                                </option>
+                            </select>
+                        </th>
+                    <th class="w-25">
+                        <select class="form-select" required name="specialty"
+                                aria-label="Yo'nalishlar" >
+                            <option @if($options->specialty == 5330600) selected
+                                    @endif value="5330600">DASTURIY INJINIIRNG
+                            </option>
+                            <option @if($options->specialty == 5330500) selected
+                                    @endif   value="5330500">KOMPYUTER INJINIRINGI
+                            </option>
+                            <option @if($options->specialty == 5350100) selected
+                                    @endif  value="5350100">TELEKOMMUNIKATSIYA TEXNOLOGIYALARI
+                            </option>
+                            <option @if($options->specialty == 5350400) selected
+                                    @endif  value="5350400">AKT SOHASIDA KASB TALIMI
+                            </option>
+                            <option @if($options->specialty == 5330300) selected
+                                    @endif  value="5330300">AXBOROT XAVFSIZLIGI
+                            </option>
+                            <option @if($options->specialty == 5350101) selected
+                                    @endif  value="5350101">TELEKOMMUNIKATSIYA INJINIRINGI
+                            </option>
+                        </select>
+                    </th>
+                    <th>
+
+                        <select name="status" class="form-select" id="select3" >
+                            <option selected value="0">Barchasi</option>
+                            <option @if($options->status=="new") selected @endif value="new">Yangi</option>
+                            <option @if($options->status=="process") selected @endif value="process">Jarayonda
+                            </option>
+                            <option @if($options->status=="end") selected @endif value="end">Topshirilgan</option>
+                        </select>
+                    </th>
+                        <th class="btn-group">
+                            <button type="submit" class="btn btn-primary "><i class="bx bx-filter-alt"></i>Filtr
+                            </button>
+                            @if(auth()->check())
+                                <button type="button" class="btn btn-success float-end " data-bs-toggle="modal" data-bs-target="#createModal">
+                                    <i class="bx bx-plus"></i> Qo'shish
+                                </button>
+                            @endif
+                        </th>
+                    </tr>
+                </table>
+            </form>
+            <h1 class="text float-start">Mavzular ro'yhati</h1>
 
         </div>
         <div class="card-body">
@@ -22,16 +104,18 @@
                             <button data-bs-toggle="modal" data-bs-target="#batafsilModal{{$theme->id}}" type="button"
                                     class="btn btn-outline-dark">Batafsil
                             </button>
-                            @if(auth()->check())
+
                                 @if($theme->student_id == 0)
                                     <button data-bs-toggle="modal" data-bs-target="#editModal{{$theme->id}}" type="button"
                                             class="btn btn-warning"><i class="bx bx-pencil"></i></button>
                                     <button data-bs-toggle="modal" data-bs-target="#deleteModal{{$theme->id}}" type="button"
                                             class="btn btn-danger"><i class="bx bx-trash"></i></button>
                                 @else
+                                @if($theme->status=="end")
+                                    <a href="{{route('show-process',$theme->process->id)}}" class="btn btn-success">Topshirilgan</a>
+                                @else
                                     <a href="{{route('show-process',$theme->process->id)}}" class="btn btn-info">Jarayonda</a>
                                 @endif
-
                             @endif
                         </td>
                         <td>{{$theme->name}}</td>
@@ -42,12 +126,9 @@
                         <div class="modal-dialog">
                             <div style="" class="modal-content">
                                 <div class="modal-header border-top border-2" style="border-color: darkblue" >
-                                    @if(auth()->check())
+
                                         <h1 class="modal-title fs-5" id="exampleModalLabel">Mavzu haqida ma'lumot</h1>
-                                    @else
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Tanlangan mavzuni o'zgartira
-                                        olmaysiz, shu mavzuni tanlaysizmi ?</h1>
-                                    @endif
+
 
 
                                     <button type="button" class="btn-close "  data-bs-dismiss="modal"
@@ -70,9 +151,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Yopish
                                         </button>
-                                        @if(session()->has('loggedin'))
-                                        <button type="submit" class="btn btn-primary">Mavzuni tanlash</button>
-                                        @endif
+
                                     </div>
                                 </form>
                             </div>
