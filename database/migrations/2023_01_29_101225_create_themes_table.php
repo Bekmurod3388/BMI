@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('themes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->text('description')->default("-");
+            $table->longText('description')->default("no");
             $table->string('status')->default('new');
             $table->string('specialty')->nullable();
             $table->string('level')->nullable();
