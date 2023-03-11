@@ -10,7 +10,7 @@ class ProcessService
     public static function create(){
 
     }
-    public static function update($id, $file=null, $desc=null, $link=null, $status=null)
+    public static function update($id, $file=null, $desc=null, $link=null, $status=null,$percentage=null)
     {
         $process = Process::find($id);
         if ($file != null) {
@@ -24,8 +24,13 @@ class ProcessService
 
             $theme = Theme::find($process->theme_id);
             $theme->status = $status;
+            if ($percentage != null)
+                $theme->percentage = $percentage;
+            if ($percentage==100)
+                $theme->status = 'end';
             $theme->save();
         }
+
 
         $process->save();
         if ($link != null){

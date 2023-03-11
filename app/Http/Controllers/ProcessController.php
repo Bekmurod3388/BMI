@@ -43,7 +43,7 @@ class ProcessController extends Controller
 
         try {
 
-            ProcessService::update($request->id, $request->file, $request->process, $request->link, $request->status );
+            ProcessService::update($request->id, $request->file, $request->process, $request->link, $request->status,$request->percentage );
 
             return redirect()->back()->with('msg', 'Jarayon muvaffaqiyatli yangilandi');
 

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('status')->default('new');
+            $table->tinyInteger('percentage')->default(0);
             $table->string('specialty')->nullable();
             $table->string('level')->nullable();
             $table->string('semester')->nullable();

@@ -48,12 +48,21 @@
                     </textarea>
                     </div>
                     <div class="mb-3">
+                        <label for="percentage" class="fw-bolder badge fs-4 text-primary">Bajarilgan ish foizi:</label>
+                        <select name="percentage" id="percentage" class="form-select">
+                            @for($i=0;$i<101;$i+=5)
+                                <option value="{{$i}}" @if($process->theme->percentage==$i) selected @endif>{{$i}}%</option>
+                            @endfor
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="statusi" class="fw-bolder badge fs-4 text-primary">Holati:</label>
                         <select name="status" id="statusi" class="form-select">
                             <option value="process" @if($process->theme->status=="process") selected @endif>Jarayonda</option>
                             <option value="end" @if($process->theme->status=="end") selected @endif>Topshirildi</option>
                         </select>
                     </div>
+
 
                     <div class="mb-3">
                         <button type="submit" class="btn btn-primary p-2">O'zgarishlarni saqlash</button>
