@@ -8,6 +8,7 @@ use App\Http\Controllers\{
     ProcessController,
     ProfileController,
     MudirController,
+    StatisticController
 };
 
 Route::get('/', function () {
@@ -42,6 +43,9 @@ Route::middleware('hemis')->group(function () {
         Route::resource('teachers',TeacherController::class);
         Route::get('mudir-themes', [MudirController::class, 'themes'])->name('mudir-themes');
         Route::get('filtered-themes', [MudirController::class, 'filteredThemes'])->name('filtered-themes');
+        Route::get('statistics-teacher', [StatisticController::class, 'teachers'])->name('statistics-teacher');
+        Route::get('statistics-student', [StatisticController::class, 'students'])->name('statistics-student');
+
     });
 
     Route::middleware('teacher')->group(function(){

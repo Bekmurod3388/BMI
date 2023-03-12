@@ -70,6 +70,17 @@
         @if(auth()->check())
             @if(auth()->user()->role=='mudir')
 
+                <li class="menu-item active ">
+                    <a href="{{route('statistics-teacher')}}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-user-circle"></i>
+                        <div data-i18n="Analytics">Statistika O'qituvchilar</div>
+                    </a>
+                </li><li class="menu-item active ">
+                    <a href="{{route('statistics-student')}}" class="menu-link">
+                        <i class="menu-icon tf-icons bx bx-user-circle"></i>
+                        <div data-i18n="Analytics">Statistika Talabalar</div>
+                    </a>
+                </li>
             <li class="menu-item active ">
                 <a href="{{route('teachers.index')}}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-user-circle"></i>
