@@ -19,9 +19,13 @@ class MudirController extends Controller
             $query->where('mudir_id', $mudirId);
         })
             ->with('process')
+            ->where('semester','8-semestr')
             ->get();
+        $options=(object)[
+            'semester'=>'8-semestr'
+        ];
 
-        return view('admin.themes.mudir', compact('groups', 'teachers', 'themes'));
+        return view('admin.themes.mudir', compact('groups', 'teachers', 'themes','options'));
     }
 
     public function filteredThemes(Request $request)

@@ -6,15 +6,24 @@ use App\Models\Process;
 use App\Models\Theme;
 use App\Services\ThemeService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 
 class ThemeController extends Controller
 {
     public function index()
     {
-        $themes=Theme::all()
-            ->where('teacher_id',auth()->id())
-            ->where('specialty',5330600)
-            ->where('semester','8-semestr');
+        $themes = Theme::where('semester', '8-semestr')
+            ->where('teacher_id', auth()->id())
+            ->where('specialty', 5330600)
+            ->select(array_diff(
+                Schema::getColumnListing('themes'),
+                ['created_at', 'updated_at']
+            ))
+            ->get();
+
+
+
+
         $options = (object)[
             'specialty' => 5330600,
             'status' => 0,

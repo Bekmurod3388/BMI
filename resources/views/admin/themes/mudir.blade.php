@@ -28,10 +28,10 @@
                         <th>
                             <select name="semester" class="form-select" id="select0">
                                 <option value="0">Barchasi</option>
-                                <option value="5-semestr">5-semestr</option>
-                                <option value="6-semestr">6-semestr</option>
-                                <option value="7-semestr">7-semestr</option>
-                                <option value="8-semestr">8-semestr</option>
+                                <option @if($options->semester=='5-semestr') selected @endif value="5-semestr">5-semestr</option>
+                                <option @if($options->semester=='6-semestr') selected @endif value="6-semestr">6-semestr</option>
+                                <option @if($options->semester=='7-semestr') selected @endif value="7-semestr">7-semestr</option>
+                                <option @if($options->semester=='8-semestr') selected @endif value="8-semestr">8-semestr</option>
                             </select>
                         </th>
                         <th>
