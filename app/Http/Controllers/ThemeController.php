@@ -14,11 +14,11 @@ class ThemeController extends Controller
         $themes=Theme::all()
             ->where('teacher_id',auth()->id())
             ->where('specialty',5330600)
-            ->where('semester','5-semestr');
+            ->where('semester','8-semestr');
         $options = (object)[
             'specialty' => 5330600,
             'status' => 0,
-            'semester' => "5-semestr",
+            'semester' => "8-semestr",
         ];
         return view('admin.themes.index', compact('themes', 'options',));
     }

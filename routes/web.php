@@ -6,7 +6,6 @@ use App\Http\Controllers\{
     TeacherController,
     ThemeController,
     ProcessController,
-    ProfileController,
     MudirController,
     StatisticController
 };

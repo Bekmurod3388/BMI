@@ -15,12 +15,13 @@
             content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
 
-    <title>Admin</title>
+    <title>BMI | Kurs ishi</title>
 
-    <meta name="description" content="" />
+    <meta name="description" content="TATU UF talabalari bitiruv malakaviy ishlari va kurs ishlari qabul qilish va topshirish uchun yaratilgan">
+    <meta name="keywords" content="Kurs ishi , BMI, bmi, ">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="https://www.ubtuit.uz/img/tuit_logo.png" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
