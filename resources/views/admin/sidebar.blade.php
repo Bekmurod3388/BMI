@@ -20,18 +20,18 @@
 
                 <li class="menu-item active ">
                     <a href="{{route('statistics-teacher')}}" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-unite"></i>
+                        <i class="menu-icon tf-icons bx bx-chart"></i>
                         <div data-i18n="Analytics">Statistika O'qituvchilar</div>
                     </a>
                 </li><li class="menu-item active ">
                     <a href="{{route('statistics-student')}}" class="menu-link">
-                        <i class="menu-icon tf-icons bx bx-screenshot"></i>
+                        <i class="menu-icon tf-icons bx bx-bar-chart-alt"></i>
                         <div data-i18n="Analytics">Statistika Talabalar</div>
                     </a>
                 </li>
             <li class="menu-item active ">
                 <a href="{{route('teachers.index')}}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-user-circle"></i>
+                    <i class="menu-icon tf-icons bx bx-user-plus"></i>
                     <div data-i18n="Analytics">O'qituvchilar</div>
                 </a>
             </li>

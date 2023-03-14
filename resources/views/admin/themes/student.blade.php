@@ -57,7 +57,7 @@
                     <th>Mavzu</th>
                     <th>Amallar</th>
                 </tr>
-                @foreach($themes as $theme)
+                @forelse($themes as $theme)
                     <tr class="align-items-center">
                         <td class="">
                             <button data-bs-toggle="modal" data-bs-target="#batafsilModal{{$theme->id}}" type="button"
@@ -108,8 +108,11 @@
                         </div>
                     </div>
 
-
-                @endforeach
+                @empty
+                        <tr>
+                            <td colspan="2" class="text-center">Sizning yo'lanilishingizdagi tanlangan semesterdagi tanlash mumkin bo'lgan mavzular yo'q</td>
+                        </tr>
+                @endforelse
             </table>
         </div>
     </div>
