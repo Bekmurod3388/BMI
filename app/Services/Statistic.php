@@ -57,6 +57,19 @@ class Statistic
         return $themes;
 
     }
+    public static function getYears(){
+
+            return DB::table('themes')
+                ->select(DB::raw("DISTINCT CONCAT(
+                        IF(MONTH(created_at) >= 9, YEAR(created_at), YEAR(created_at) - 1),
+                        '-',
+                        IF(MONTH(created_at) >= 9, YEAR(created_at) + 1, YEAR(created_at))
+                    ) AS year"))
+                ->orderBy('created_at')
+                ->get()
+                ->pluck('year')
+                ->toArray();
+    }
 
 
 

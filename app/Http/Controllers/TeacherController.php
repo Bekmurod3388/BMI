@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Services\Statistic;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -17,6 +18,7 @@ class TeacherController extends Controller
      */
     public function index()
     {
+
         $teachers=User::all()
             ->where('role','teacher')
             ->where('mudir_id',auth()->user()->id);
